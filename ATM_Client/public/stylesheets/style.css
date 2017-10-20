@@ -1,0 +1,39 @@
+
+a {
+  color: #00B7FF;
+}
+
+ul li{
+  list-style-type: none;
+
+}
+
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url('../images/background_image.png');
+  /* Full height */
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+label{
+
+  color: #fff;
+}
+h1.display-4.m-b-2{
+
+  color: lightgrey;
+}
+
+a {
+  color: #00B7FF;
+}
+
+button.btn.btn-success{
+
+  margin-right: 10px;
+}

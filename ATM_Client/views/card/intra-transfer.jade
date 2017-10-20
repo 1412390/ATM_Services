@@ -1,0 +1,22 @@
+.col-md-6.col-md-offset-3
+    form#form_intra-transfer(method='POST' action='/card/intra-transfer')
+        .form-group
+            .alert.alert-success
+                span.glyphicon.glyphicon-tag
+                | &nbspSố dư khả dụng:&nbsp
+                strong.available_balance #{card.available_balance}
+            .alert.alert-success
+                span.glyphicon.glyphicon-tag
+                | &nbspSố dư thực:&nbsp
+                strong.current_balance #{card.current_balance}
+        .form-group
+            .alert.alert-success
+                span.glyphicon.glyphicon-list-alt
+                | &nbspNhập số tiền muốn chuyển:&nbsp
+            input#transfer_money(type="text" name="transfer_money" required)
+        .form-group
+            .alert.alert-success
+                span.glyphicon.glyphicon-user
+                | &nbspNhập ID người nhận:&nbsp
+            input#reciever(type="text" name="receiver" required)
+        input(type="submit" value="OK" class="btn btn-primary")

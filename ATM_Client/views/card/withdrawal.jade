@@ -1,0 +1,32 @@
+.col-md-6.col-md-offset-3
+    form#form_withdrawal(method='POST' action='/card/withdrawal')
+        .form-group
+            .alert.alert-info
+                span.glyphicon.glyphicon-tag
+                | &nbspSố dư khả dụng:&nbsp
+                strong.available_balance #{card.available_balance}
+            .alert.alert-info
+                span.glyphicon.glyphicon-tag
+                | &nbspSố dư thực:&nbsp
+                strong.current_balance #{card.current_balance}
+            .dropdown
+                button.btn.btn-warning.dropdown-toggle(style="width: 157px;" type='button', data-toggle='dropdown')
+                    | Chọn giá trị
+                    span.caret
+                ul.dropdown-menu
+                    li
+                        a.dropdown-item(href='javascript:void(0)') 1 triệu
+                    li
+                        a.dropdown-item(href='javascript:void(0)') 2 triệu
+                    li
+                        a.dropdown-item(href='javascript:void(0)') 5 triệu
+                    li.divider
+                    li
+                        a.dropdown-item(href='javascript:void(0)') Giá trị khác
+            input#withdraw_money(hidden, name="withdraw_money")
+        .form-group
+            .alert.alert-info
+                | Số tiền được chọn:&nbsp
+                strong.withdraw_money
+            input#another_val(hidden="hidden" type="text")
+        input(type="submit" value="OK" class="btn btn-success")

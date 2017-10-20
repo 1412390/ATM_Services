@@ -1,0 +1,21 @@
+extends layout/layout_2
+
+block content
+    .container
+        .main
+            .left-main
+                a.list-group-item.list-group-item-action(href='/')
+                    img(src='/images/logo.jpg')
+                ul.list-group
+                    a.list-group-item.list-group-item-action#1(href='javascript:void(0)') Thông tin tài khoản
+                    a.list-group-item.list-group-item-action#2(href='javascript:void(0)') Rút tiền
+                    a.list-group-item.list-group-item-action#3(href='javascript:void(0)') Chuyển khoản nội bộ
+                    a.list-group-item.list-group-item-action#4(href='javascript:void(0)') Chuyển khoản liên ngân hàng
+                    a.list-group-item.list-group-item-action#5(href='javascript:void(0)') Lịch sử giao dịch
+            .right-main
+                .right-main-header
+                    h2 Xin chào #{user.name}
+                .right-main-body
+
+                .right-main-footer
+

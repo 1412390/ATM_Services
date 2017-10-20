@@ -1,0 +1,14 @@
+.col-md-6.col-md-offset-3
+    ul.list-group
+        li.list-group-item.list-group-item-info
+            span.glyphicon.glyphicon-user
+            | &nbspTên đăng nhập:&nbsp
+            strong #{user.username}
+        li.list-group-item.list-group-item-info
+            span.glyphicon.glyphicon-envelope
+            | &nbspEmail:&nbsp
+            strong #{user.email}
+        li.list-group-item.list-group-item-info
+            span.glyphicon.glyphicon-gift
+            | &nbspNgày sinh:&nbsp
+            strong #{user.dob}

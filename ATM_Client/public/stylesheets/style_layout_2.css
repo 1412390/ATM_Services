@@ -1,0 +1,36 @@
+body{
+    background-color: #e5e5e5!important;
+}
+.container{
+    margin: 0;
+    padding: 0;
+}
+
+.main{
+    width: 100%;
+    background-color: white;
+    margin-top: 10px;
+    height: auto;
+    display: inline-block;
+
+
+}
+.left-main{
+    width: 25%;
+    float: left;
+
+}
+
+.right-main{
+    width: 75%;
+    float: right;
+}
+
+.right-main-header{
+    height: 122px;
+    border: 1px solid gainsboro;
+}
+
+.right-main-body{
+    padding: 5px;
+}

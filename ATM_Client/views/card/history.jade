@@ -1,0 +1,19 @@
+.col-md-6.col-md-offset-4
+    form#form_history(method='POST' action='/card/history')
+        .form-group
+            span.label.label-success Ngày bắt đầu
+            br
+            input#date_start(type="text" required name="date_start")
+        .form-group
+            span.label.label-primary Ngày kết thúc
+            br
+            input#date_end(type="text" required name="date_end")
+        input.btn.btn-info(type="submit" value="Xem")
+table.table.table-hover
+    thead
+        tr
+            th Mã
+            th Mô tả
+            th Giá trị
+            th Ngày
+    tbody#tbody_history

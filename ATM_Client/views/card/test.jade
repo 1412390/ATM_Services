@@ -1,0 +1,17 @@
+doctype html
+html
+    head
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    body
+        .container
+            form(action='/card/test' method="post")
+                .form-group
+                    label Username
+                        input(type='text' name="username")
+                .form-group
+                    label Password
+                        input(type='password' name="password")
+                input(type="submit" value="submit" class="btn btn-success")

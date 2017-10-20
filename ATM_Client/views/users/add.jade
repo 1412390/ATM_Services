@@ -1,0 +1,32 @@
+extends layout/layout_1
+
+block content
+    .main.container
+        .row
+            .col-md-6.col-md-offset-3
+                h1.display-4.m-b-2 #{title}
+                if error !== ""
+                    each err in error
+                        div.alert.alert-danger(role='alert') #{err.msg}
+                // register form
+                form#form_adduser(method='POST' action='/users/add')
+                    div.form-group
+                        label(for='username') Username:
+                        input#username.form-control(type='text'  name='username' maxlength='15' minlength='4' value='#{username}', required )
+                    div.form-group
+                        label(for='password') Password:
+                        input#password.form-control(type='password'   name='password' maxlength='64' minlength='8' value='#{password}', required)
+                    div.form-group
+                        label(for='cfm_password') Confirm Password:
+                        input#cfm_password.form-control(type='password' name='cfm_password' maxlength='64' minlength='8', required value='#{cfm_password}')
+                    div.form-group
+                            label(for='email') Email:
+                            input#email.form-control(type='email' placeholder='abc@email.com' name='email' maxlength="64" minlength="8", required value='#{email}')
+                    div.form-group
+                            label(for='name') Name:
+                            input#name.form-control(type='text' name='name' maxlength="64", required value='#{name}')
+                    div.form-group
+                            label(for='dob') Date of Birth:
+                            input#dob.form-control(type='date' name='dob', required value='#{dob}')
+                    button.btn.btn-primary(type='submit') Submit
+            .col-md-6.col-md-offset-3
