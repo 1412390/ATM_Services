@@ -1,13 +1,13 @@
-var express = require('express');
-var db = require('./db.js');
-var expressValidator = require('express-validator');
-var router = express.Router();
-var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
-const secretOrPrivateKey = 'superSecret';
+const config = require('../../ATM_Server/config.js');
+const express = require(config.Express);
+const db = require(config.PATH_DB);
+const expressValidator = require(config.ExpressValidator);
+const jwt = require(config.JWT); // used to create, sign, and verify tokens
+const secretOrPrivateKey = config.secretOrPrivateKey;
+const moment = require(config.Moment);
 
+const router = express.Router();
 //moment
-var moment = require('moment');
-
 router.post('/infor-user', function (req, res, next) {
 
     var token = req.body.token;
@@ -60,7 +60,7 @@ router.post('/excute_withdrawal', function (req, res, next) {
 
     jwt.verify(token, secretOrPrivateKey, function (err, decoded) {
 
-        if (err) return res.json({ message: err });
+        if (err) return res.json({ success: false, message: err });
         var user_id = decoded.user_id;
 
         const sql = `select* from card where user_id = ${user_id}`;
@@ -102,16 +102,16 @@ router.post('/excute_withdrawal', function (req, res, next) {
                                             success: true
                                         });
                                     },
-                                    err => console.log(err + '')
+                                    err => {res.json({ success: false, message: err + '' });}
                                 );
                             },
-                            err => console.log(err + '')
+                            err => {res.json({ success: false, message: err + '' });}
                         );
                     },
-                    err => console.log(err + '')
+                    err => {res.json({ success: false, message: err + '' });}
                 );
             },
-            err => console.log(err + '')
+            err => {res.json({ success: false, message: err + '' });}
         );
     });
 });
@@ -133,7 +133,7 @@ router.post('/intra-transfer', function (req, res, next) {
                     card: data[0]
                 });
             },
-            err => { res.json({ success: false, message: err }); }
+            err => { res.json({ success: false, message: err + ''}); }
         );
     });
 });
@@ -209,25 +209,23 @@ router.post('/excute_intra-transfer', function (req, res, next) {
 
                                             db.load(sql_history).then(
                                                 success => { return res.json({ success: true }); },
-                                                err => console.log(err + '')
+                                                err => {res.json({ success: false, message: err + '' });}
                                             );
                                         },
-                                        err => console.log(err + '')
+                                        err => {res.json({ success: false, message: err + '' });}
                                     );
                                 },
-                                err => console.log(err + '')
+                                err => {res.json({ success: false, message: err + '' });}
                             );
                         }
                         else {
                             return res.json({ success: false, message: 'Người nhận không cùng ngân hàng!' });
                         }
                     },
-                    err => {
-                        console.log(err + '');
-                    }
+                    err => {res.json({ success: false, message: err + '' });}                    
                 );
             },
-            err => console.log(err + '')
+            err => {res.json({ success: false, message: err + '' });}
         );
     });
 });
@@ -322,21 +320,19 @@ router.post('/excute_interbank-transfer', function (req, res, next) {
 
                                         db.load(sql_history).then(
                                             success => { return res.json({ success: true }); },
-                                            err => console.log(err + '')
+                                            err => {res.json({ success: false, message: err + '' });}
                                         );
                                     },
-                                    err => console.log(err + '')
+                                    err => {res.json({ success: false, message: err + '' });}
                                 );
                             },
-                            err => console.log(err + '')
+                            err => {res.json({ success: false, message: err + '' });}
                         );
                     },
-                    err => {
-                        console.log(err + '');
-                    }
+                    err => {res.json({ success: false, message: err + '' });}                    
                 );
             },
-            err => console.log(err + '')
+            err => {res.json({ success: false, message: err + '' });}
         );
     });
 });
@@ -364,17 +360,9 @@ router.post('/history', function (req, res, next) {
             success => {
                 return res.json({message: true, success: success});
             },
-            err => console.log(err + '')
+            err => {res.json({ success: false, message: err + '' });}
         )
 
     });
-});
-router.get('/test', function (req, res, next) {
-
-    res.render('card/test');
-});
-router.get('/error', function (req, res, next) {
-
-    return res.render('card/error', { error: '' });
 });
 module.exports = router;

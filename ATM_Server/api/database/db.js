@@ -64,6 +64,7 @@ exports.update = (sql) => {
         if (err) {
             d.reject(err);
         } else {
+            console.log(rows);
             d.resolve(rows);
         }
         cn.end();

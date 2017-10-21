@@ -1,16 +1,20 @@
-var express = require('express');
-var db = require('./db.js');
-var router = express.Router();
-var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var bcrypt = require('bcrypt');
-const secretOrPrivateKey = 'superSecret';
 /* GET users listing. */
+const config = require('../../ATM_Server/config.js');
+const express = require(config.Express);
+const db = require(config.PATH_DB);
+const expressValidator = require(config.ExpressValidator);
+const jwt = require(config.JWT); // used to create, sign, and verify tokens
+const secretOrPrivateKey = config.secretOrPrivateKey;
+var bcrypt = require(config.Bcrypt);
+const moment = require(config.Moment);
 
+const router = express.Router();
 router.post('/login', function (req, res, next) {
 
     var username = req.body.username;
     var password = req.body.password;
     var sql = `select id from user where username = "${username}" and password = "${password}"`;
+
     //excute sql
     db.load(sql).then(
         data => {
@@ -32,7 +36,6 @@ router.post('/login', function (req, res, next) {
                     message: 'Enjoy your token!',
                     token: token
                 });
-
             }
         },
         err => { //fail
@@ -41,7 +44,6 @@ router.post('/login', function (req, res, next) {
     );
 
 });
-
 router.post('/dashboard', function (req, res, next) {
 
     var token = req.body.token;

@@ -242,4 +242,6 @@ router.post('/history', function(req, res, next){
             err => console.log(err + '')
         );
 });
+
+
 module.exports = router;

@@ -17,7 +17,6 @@ router.get('/login', function (req, res, next) {
         error: ''});
 });
 
-
 router.post('/login', function (req, res, next) {
 
     var username = req.body.username;
@@ -57,6 +56,7 @@ router.post('/login', function (req, res, next) {
                         var token = response.data.token;
                         localStorage.setItem('token', token);
                         localStorage.setItem('login', 'true');
+                        console.log(token);
                         return  res.redirect(config.URL_CLIENT + '/users/dashboard');
                     }
                     else {
@@ -73,13 +73,6 @@ router.post('/login', function (req, res, next) {
                 err => console.log(err + '')
             );
     }
-});
-
-router.get('/logout', function (req, res, next) {
-
-    req.logout();
-    req.session.destroy();
-    res.redirect('/');
 });
 
 router.get('/add', function (req, res, neogoutxt) {
@@ -124,37 +117,6 @@ router.post('/add', function (req, res, next) {
             dob: req.body.dob
         });
     }
-
-    //prepare data
-    var username = '"' + req.body.username.trim() + '"';
-    var password = '"' +  md5(req.body.password.trim()) + '"';
-    var email = '"' + req.body.email.trim() + '"';
-    var name = '"' + req.body.name.trim() + '"';
-    var dob =   new Date('"' +  req.body.dob + '"').getTime() / 1000;
-    var sql = 'insert into user (username,  password, email, name, dob) VALUES ('
-        + username + ','
-        + password + ','
-        + email + ','
-        + name + ','
-        + dob + ')';
-
-    //excute sql
-    db.insert(sql).then(
-        data =>  {//successful!
-            return res.redirect('/users/login');
-        },
-        err =>{//fail
-
-            return res.render('users/add', {
-                title: 'REGISTER FAILED',
-                username: req.body.username,
-                password: req.body.password,
-                cfm_password: req.body.cfm_password,
-                email: req.body.email,
-                name: req.body.name,
-                dob: req.body.dob,
-                error: [{msg: err.sqlMessage}]});
-        })
 });
 
 router.get('/edit/:id', function (req, res, next) {
@@ -214,11 +176,20 @@ router.get('/dashboard',  function (req, res, next) {
                 );
         }
     }
+    else {
+        res.redirect('/');
+    }
 });
 
 router.get('/error', function (req, res, next) {
-
     res.render('users/error', {error: ''});
+});
+
+router.get('/logout', function(req, res, next){
+
+    localStorage.removeItem('token');
+    localStorage.setItem('login', 'false');
+    res.redirect('/');
 });
 
 module.exports = router;
